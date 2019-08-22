@@ -12,7 +12,7 @@ go build main.go
 ## Docker:
 Build the container:
 ```
-docker build --rm=true -t omerxx/drone-lambda-plugin .
+docker build --rm=true -t quay.io/parkside-securities/drone-lambda-plugin .
 ```
 
 ## Usage:
@@ -35,9 +35,10 @@ docker run --rm \
 ```yaml
 steps:
 - name: deploy-lambda
-  image: omerxx/drone-lambda-plugin
+  image: quay.io/parkside-securities/drone-lambda-plugin
   settings:
     pull: true
+    function_region: us-west-2
     function_name: my-function
     s3_bucket: some-bucket
     file_name: lambda-dir/lambda-project-${DRONE_BUILD_NUMBER}.zip
@@ -70,9 +71,10 @@ steps:
   image: omerxx/drone-lambda-plugin
   settings:
     pull: true
+    function_region: us-west-2
     function_name: my-function
     s3_bucket: some-bucket
-    file_name: lambda-dir/revenue-report-${DRONE_BUILD_NUMBER}.zip
+    file_name: lambda-dir/lambda-project-${DRONE_BUILD_NUMBER}.zip
 
 - name: notify-slack-releases
   image: plugins/slack
